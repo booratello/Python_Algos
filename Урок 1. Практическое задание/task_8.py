@@ -16,3 +16,50 @@
 Он просто позволяет протестировать условие в одной строке,
 заменяя многострочное if-else, делая код компактным.
 """
+
+import sys
+
+
+def is_it_int(some_var):
+    """
+    Проверка валидности вводимых пользователем данных.
+    :param some_var: str
+    :return: int
+    """
+
+    try:
+        some_var = int(some_var)
+    except ValueError:
+        sys.exit("Вы ввели значение,не являющееся целым положительным числом.")
+    if some_var <= 0:
+        sys.exit("Вы ввели отрицательное число или 0 (последнее спорно, "
+                 "поэтому не учитываем).")
+    return some_var
+
+
+def first_variant(year):
+    """
+    Вариант решения с обычным ветвлением.
+    :param year: int
+    :return: str
+    """
+    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
+        return f"{year} год является високосным."
+    return f"{year} год не явялется високосным."
+
+
+def second_variant(year):
+    """
+    Вариант решения с тенарным оператором.
+    :param year: int
+    :return: str
+    """
+    return f"{year} год является високосным." \
+        if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0) else \
+        f"{year} год не явялется високосным."
+
+
+SOME_YEAR = is_it_int(input("Введите номер года, целое положительное число: "))
+
+print(first_variant(SOME_YEAR))
+print(second_variant(SOME_YEAR))

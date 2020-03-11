@@ -8,3 +8,16 @@
 
 Подсказка: используйте ф-ции chr() и ord()
 """
+import sys
+
+CHAR_NUM = input("Введите номер буквы (целое число от 97 до 122).\n")
+
+try:
+    CHAR_NUM = int(CHAR_NUM)
+except ValueError:
+    sys.exit("Вы ввели значение, не являющееся целым числом между 97 и 122.")
+
+if CHAR_NUM < 97 or CHAR_NUM > 122:
+    sys.exit("Вы ввели число вне диапазона 97-122.")
+
+print(f'Введёному номеру соответствует буква "{chr(CHAR_NUM)}".')
