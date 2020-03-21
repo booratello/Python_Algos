@@ -8,3 +8,30 @@
 
 ЗДЕСЬ ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ ЧЕРЕЗ ЦИКЛ
 """
+
+import sys
+
+NUMBER = COUNT = input("Введите целое число для определения количества "
+                       "элементов ряда (отрицательное число будет взято по "
+                       "модулю) или 'q' для выхода:\n")
+
+while True:
+    if NUMBER == "q":
+        sys.exit("Вы вышли из программы")
+    try:
+        NUMBER = abs(int(NUMBER))
+        break
+    except ValueError:
+        NUMBER = input("Вы ввели значение, не являющееся целым числом. "
+                       "Повторите попытку или введите 'q' для выхода:\n")
+        continue
+
+SUM = 0
+SERIES_NUM = 1
+
+while NUMBER != 0:
+    SUM += SERIES_NUM
+    SERIES_NUM = -1 * SERIES_NUM / 2
+    NUMBER -= 1
+
+print(f"Количество элементов ряда - {COUNT}, их сумма - {SUM}.")

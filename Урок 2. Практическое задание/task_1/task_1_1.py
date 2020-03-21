@@ -13,7 +13,8 @@
 Подсказка:
 Постарайтесь решить задачу двумя способами:
 1. Через цикл
-Вариант исполнения: в бесконечном цикле запрашивайте вид операции, например, +, - или *
+Вариант исполнения: в бесконечном цикле запрашивайте вид операции, например, +,
+- или *
 Проверяйте вид операции и запускайте соответствующую команду
 Предусмотрите выход из бесконечного цикла
 2. Рекурсией.
@@ -32,3 +33,61 @@
 
 ЗДЕСЬ ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ ЧЕРЕЗ ЦИКЛ
 """
+
+import sys
+
+
+def validation(some_var):
+    """
+    Проверка валидности вводимых пользователем данных.
+    :param some_var: str
+    :return: float
+    """
+    while True:
+        if some_var == "q":
+            sys.exit("Вы вышли из программы")
+        try:
+            some_var = float(some_var)
+        except ValueError:
+            some_var = input("Вы ввели значение, не являющееся числом. "
+                             "Повторите попытку или введите 'q' для выхода:\n")
+            continue
+        return some_var
+
+
+FIRST_NUM = validation(input("Введите первое число или \"q\" для выхода:\n"))
+SECOND_NUM = validation(input("Введите второе число или \"q\" для выхода:\n"))
+
+while True:
+    # Решил вместо 0 использовать q для общего стиля в задаче.
+    ARITHMETIC_OPERATION = input("Введите знак арифметической операции для "
+                                 "вычисления или \"q\" для выхода:\n")
+    if ARITHMETIC_OPERATION == "q":
+        sys.exit("Вы вышли из программы")
+
+    elif ARITHMETIC_OPERATION == "+":
+        print(f"{FIRST_NUM} + {SECOND_NUM} = "
+              f"{round(FIRST_NUM + SECOND_NUM, 3)}")
+        continue
+
+    elif ARITHMETIC_OPERATION == "-":
+        print(f"{FIRST_NUM} - {SECOND_NUM} = "
+              f"{round(FIRST_NUM - SECOND_NUM, 3)}")
+        continue
+
+    elif ARITHMETIC_OPERATION == "*":
+        print(f"{FIRST_NUM} * {SECOND_NUM} = "
+              f"{round(FIRST_NUM * SECOND_NUM, 3)}")
+        continue
+
+    elif ARITHMETIC_OPERATION == "/":
+        if SECOND_NUM != 0:
+            print(f"{FIRST_NUM} / {SECOND_NUM} = "
+                  f"{round(FIRST_NUM / SECOND_NUM, 3)}")
+        else:
+            print("Делить на ноль можно, но не в этом случае.")
+        continue
+
+    else:
+        print("Ошибка ввода.")
+        continue

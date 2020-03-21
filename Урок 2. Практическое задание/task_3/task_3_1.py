@@ -12,3 +12,36 @@
 
 ЗДЕСЬ ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ ЧЕРЕЗ ЦИКЛ
 """
+
+import sys
+
+NUMBER = input("Введите целое число (отрицательное число будет взято по "
+               "модулю) или 'q' для выхода:\n")
+
+while True:
+    if NUMBER == "q":
+        sys.exit("Вы вышли из программы")
+    try:
+        NUMBER = abs(int(NUMBER))
+        break
+    except ValueError:
+        NUMBER = input("Вы ввели значение, не являющееся целым числом. "
+                       "Повторите попытку или введите 'q' для выхода:\n")
+        continue
+
+# Вариант в целом работающий, но без ведущих нолей для чисел, оригинал которых
+# был с нолями в конце. Ноли можно добавить строковыми методами, или изначально
+# делая всё через сложение строк. Но это уже будут не арифметические операции.
+INVERT_NUMBER = 0
+
+while True:
+    NUMBER, BUFFER_NUMBER = NUMBER // 10, NUMBER % 10
+
+    INVERT_NUMBER += BUFFER_NUMBER
+
+    if NUMBER != 0:
+        INVERT_NUMBER *= 10
+    else:
+        break
+
+print(f"Отзеркаленное число:\n{INVERT_NUMBER}")

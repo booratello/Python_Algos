@@ -5,3 +5,51 @@
 
 ЗДЕСЬ ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ ЧЕРЕЗ РЕКУРСИЮ
 """
+
+import sys
+
+
+def validation(some_var):
+    """
+    Проверка валидности вводимых пользователем данных.
+    :param some_var: str
+    :return: int
+    """
+    if some_var == "q":
+        sys.exit("Вы вышли из программы")
+    try:
+        some_var = abs(int(some_var))
+        return some_var
+    except ValueError:
+        return validation(input("Вы ввели значение, не являющееся целым "
+                                "числом. Повторите попытку или введите 'q' "
+                                "для выхода:\n"))
+
+
+def rec_func(num, sum_el=0):
+    """
+    Фукция принимает число и вызывает саму себя, уменьшая значние исходного
+    числа на 1 и увеличивая сумму чисел на последнее зачение числа.
+    :param num: int
+    :param sum_el: int
+    :return: int
+    """
+    return rec_func(num - 1, sum_el + num) if num != 0 else sum_el
+
+
+NUMBER = validation(input("Нужно проверить равеноство 1+2+...+n = n(n+1)/2.\n"
+                          "Введите целое число n (отрицательное число будет "
+                          "взято по модулю) или 'q' для выхода:\n"))
+
+print("Проверим левую часть равенства.")
+SUM = rec_func(NUMBER)
+print(f"Левая часть выражения равна {SUM}.")
+
+print("Проверим правую часть равенства.")
+EXCEPTION = int(NUMBER * (NUMBER + 1) / 2)
+print(f"Правая часть выражения равна {EXCEPTION}.")
+
+if SUM == EXCEPTION:
+    print(f"Левая часть выражения равна правой, ч.т.д.")
+else:
+    print("Поздравляю, вы победили матемаику.")

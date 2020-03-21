@@ -13,7 +13,8 @@
 Подсказка:
 Постарайтесь решить задачу двумя способами:
 1. Через цикл
-Вариант исполнения: в бесконечном цикле запрашивайте вид операции, например, +, - или *
+Вариант исполнения: в бесконечном цикле запрашивайте вид операции, например, +,
+- или *
 Проверяйте вид операции и запускайте соответствующую команду
 Предусмотрите выход из бесконечного цикла
 2. Рекурсией.
@@ -33,3 +34,65 @@
 
 ЗДЕСЬ ДОЛЖНА БЫТЬ РЕАЛИЗАЦИЯ ЧЕРЕЗ РЕКУРСИЮ
 """
+
+import sys
+
+
+def validation(some_var):
+    """
+    Проверка валидности вводимых пользователем данных.
+    :param some_var: str
+    :return: float
+    """
+    if some_var == "q":
+        sys.exit("Вы вышли из программы")
+    try:
+        some_var = float(some_var)
+        return some_var
+    except ValueError:
+        return validation(input("Вы ввели значение, не являющееся числом. "
+                                "Повторите попытку или введите 'q' для "
+                                "выхода:\n"))
+
+
+def rec_func(first, second):
+    """
+    Функция принимает 2 числа и вызвыает саму себя, каждый раз запрашивая
+    знак арифметической операции и печатая результат соответствующей операции
+    для этих чисел. Выход их рекурсии осуществляется вводом символа 'q'.
+    :param first: float
+    :param second: float
+    :return: str
+    """
+    # Решил вместо 0 использовать q для общего стиля в задаче.
+    arithmetic_operation = input("Введите знак арифметической операции для "
+                                 "вычисления или \"q\" для выхода:\n")
+
+    if arithmetic_operation == "+":
+        print(f"{first} + {second} = {round(first + second, 3)}")
+
+    elif arithmetic_operation == "-":
+        print(f"{first} - {second} = {round(first - second, 3)}")
+
+    elif arithmetic_operation == "*":
+        print(f"{first} * {second} = {round(first * second, 3)}")
+
+    elif arithmetic_operation == "/":
+        if second != 0:
+            print(f"{first} / {second} = {round(first / second, 3)}")
+        else:
+            print("Делить на ноль можно, но не в этом случае.")
+
+    elif arithmetic_operation != "q":
+        print("Ошибка ввода.")
+
+    else:
+        return print("Вы вышли из программы")
+
+    return rec_func(first, second)
+
+
+FIRST_NUM = validation(input("Введите первое число или \"q\" для выхода:\n"))
+SECOND_NUM = validation(input("Введите второе число или \"q\" для выхода:\n"))
+
+rec_func(FIRST_NUM, SECOND_NUM)
