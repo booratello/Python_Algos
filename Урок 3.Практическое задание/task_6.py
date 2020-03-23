@@ -13,3 +13,19 @@
 Массив: [88, 58, 50, 77, 49, 6, 42, 67, 14, 79]
 Сумма элементов между минимальным (6)  и максимальным (88) элементами: 234
 """
+
+from random import randrange
+
+# Я верю в пользователя, он точно введёт число.
+TOTAL_EL = int(input("Введите количество элементов в массиве:\n"))
+RAND_LIST = [randrange(-30, 31) for _ in range(TOTAL_EL)]
+print(f"Получен следующий список:\n{RAND_LIST}.")
+
+MIN_IDX = RAND_LIST.index(min(RAND_LIST))
+MAX_IDX = RAND_LIST.index(max(RAND_LIST))
+
+if MIN_IDX > MAX_IDX:
+    MIN_IDX, MAX_IDX = MAX_IDX, MIN_IDX
+
+print(f"Сумма элементов между минимальным ({min(RAND_LIST)}) и максимальным "
+      f"({max(RAND_LIST)}) элементами: {sum(RAND_LIST[MIN_IDX + 1: MAX_IDX])}")
