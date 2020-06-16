@@ -8,3 +8,11 @@
 Базовый список: [-55, -69, -5, 72, -41, -58, -79, 58, 74, 1]
 Максимальный отрицательный элемент в данном массиве = -5, его индекс 2
 """
+
+from random import randrange
+
+RAND_LIST = [randrange(-20, 20) for _ in range(10)]
+print(f"Базовый список:\n{RAND_LIST}")
+MAX_NEGATIVE = max([i for i in RAND_LIST if i < 0])
+print(f"Максимальный отрицательный элемент в данном списке = "
+      f"{MAX_NEGATIVE}, его индекс {RAND_LIST.index(MAX_NEGATIVE)}.")
